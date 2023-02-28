@@ -39,7 +39,10 @@ router.get('/get-developers',(req,res)=>{
 
 
 router.get('/get-projects',(req,res)=>{
-    pool.query(`select p.* , (select c.name from country c where c.id = p.countryid) as countryname from projects p order by id desc`,(err,result)=>{
+    pool.query(`select p.* ,
+    (select d.name from developers d where d.id = p.developersid) as developername,
+     (select c.name from country c where c.id = p.countryid) as countryname
+      from projects p order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
     })

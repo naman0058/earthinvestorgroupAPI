@@ -1,5 +1,6 @@
 let categories = []
 let subcategories = []
+let developers = []
 
 let table = '/admin/dashboard/store-listing/projects'
 
@@ -9,6 +10,18 @@ $.getJSON(`/api/get-country`, data => {
     subcategories = data
     fillDropDown('countryid',data, 'Choose Country', 0)
 })
+
+
+$.getJSON(`/api/get-developers`, data => {
+    developers = data
+    fillDropDown('developersid', [], 'Choose Developers', 0)
+})
+
+$('#countryid').change(() => {
+    const filteredData = developers.filter(item => item.countryid == $('#countryid').val())
+    fillDropDown('developersid', filteredData, 'Choose Developers', 0)
+})
+
 
 
 
@@ -93,10 +106,19 @@ $('#result').on('click', '.deleted', function() {
 
 
 
+$('#pcountryid').change(() => {
+    const filteredData = developers.filter(item => item.countryid == $('#pcountryid').val())
+    fillDropDown('pdevelopersid', filteredData, 'Choose Developers', 0)
+})
+
+
+
 $('#result').on('click', '.edits', function() {
     const id = $(this).attr('id')
     const result = categories.find(item => item.id == id);
     fillDropDown('pcountryid', subcategories, 'Choose Country', result.countryid)
+    $('#pdevelopersid').append($('<option>').val(result.developersid).text(result.developername))
+
   
 
     $('#editdiv').show()
@@ -104,6 +126,8 @@ $('#result').on('click', '.edits', function() {
     $('#insertdiv').hide() 
     $('#pid').val(result.id)
      $('#pname').val(result.name)
+     $('#pdevelopersid').val(result.developersid)
+
 
    
  })
@@ -123,7 +147,9 @@ $('#update').click(function(){  //data insert in database
     let updateobj = {
         id: $('#pid').val(),
         name: $('#pname').val(),
-        countryid : $('#pcountryid').val()
+        countryid : $('#pcountryid').val(),
+        developersid : $('#pdevelopersid').val()
+
        
         }
 
