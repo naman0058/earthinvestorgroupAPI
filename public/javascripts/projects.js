@@ -61,6 +61,8 @@ function makeTable(categories){
 <th>Icon</th>
 <th>Name</th>
 <th>Country Name</th>
+<th>Developer Name</th>
+
 <th>Options</th>
 </tr>
 </thead>
@@ -74,6 +76,8 @@ table+=`<tr>
 </td>
 <td>${item.name}</td>
 <td>${item.countryname}</td>
+<td>${item.developername}</td>
+
 
 <td>
 <a href="#!" class="btn btn-info btn-sm edits" id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit </a>
