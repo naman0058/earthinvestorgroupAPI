@@ -101,4 +101,22 @@ router.get('/get-listing_imagess',(req,res)=>{
 })
 
 
+
+router.get('/get-brochure',(req,res)=>{
+    pool.query(`select l.* , (select li.name from listing li where li.id = l.listingid) as listingname from brochure l order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
+
+router.get('/get-review',(req,res)=>{
+    pool.query(`select l.* , (select li.name from listing li where li.id = l.listingid) as listingname from review l order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
 module.exports = router

@@ -13,7 +13,7 @@
               
                 <div class="row" id='insertdiv'>
                     <div class="col-12">
-                        <h3 class="content-heading mt-3">New Listing    <span style="float: right;cursor: pointer;color:#1f5ab0;" id="show">Show All</span></h3>
+                        <h3 class="content-heading mt-3">New Brochure    <span style="float: right;cursor: pointer;color:#1f5ab0;" id="show">Show All</span></h3>
 
                     </div>
                    
@@ -21,106 +21,32 @@
                         <div class="card">
                             <div class="card-body">    
                                     <div class="basic-form">
-                                        <form action="/admin/listing/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
+                                        <form action="/admin/dashboard/store-listing/brochure/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
                                                <div class="form-row">
                                               
                                                 <div class="col-6">
-                                                    <label>Country Name</label>
-                                                   <select name="countryid" id="countryid" class="form-control"></select>
+                                                    <label>Listing</label>
+                                                   <select name="listingid" id="countryid" class="form-control"></select>
                                                 </div>
-
-                                                <div class="col-6">
-                                                    <label>State Name</label>
-                                                   <select name="stateid" id="stateid" class="form-control"></select>
-                                                </div>
-  
-                                            </div>
-
-
-
-
-                                            <div class="form-row" style="margin-top: 20px;">
+                                              
                                               
                                                 <div class="col-6">
-                                                    <label>Developers Name</label>
-                                                   <select name="developersid" id="developersid" class="form-control"></select>
+                                                    <label>Brochure</label>
+                                                    <input type="file" class="form-control" name="image" placeholder="Brochure Name">
                                                 </div>
-
-                                                <div class="col-6">
-                                                    <label>Projects Name</label>
-                                                   <select name="projectid" id="projectid" class="form-control"></select>
-                                                </div>
-  
+                                          
+                                              
+                                              
+                                              
                                             </div>
 
 
                                             <div class="form-row" style="margin-top: 20px;">
-
-
-                                                <div class="col-4">
-                                                    <label>Agent Name</label>
-                                                   <select name="agentid" id="agentid" class="form-control"></select>
-                                                </div>
-
-
-                                                <div class="col-4">
-                                                    <label>Property Type</label>
-                                                   <select name="propertytypeid" id="propertytypeid" class="form-control"></select>
-                                                </div>
                                               
-                                                <div class="col-4">
-                                                    <label>Listing Name</label>
-                                                    <input type="text" class="form-control" name="name" placeholder="Listing Name">
-                                                </div>
                                             
-                                             
-                                            </div>
-
-
-
-                                            <div class="form-row" style="margin-top: 20px;">
-
-                                                <div class="col-6">
-                                                    <label>Description</label>
-                                                    <textarea name="description" id="description"  class="form-control" placeholder="Listing Description"></textarea>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <label>Address</label>
-                                                    <textarea name="address" id="address"  class="form-control" placeholder="Address"></textarea>
-                                                </div>
+                                              
                                               
                                             </div>
-
-                                            <label style="margin-top:20px ;">Amenities</label><br/>
-
-                                            <div id="amenities"></div>
-
-
-                                         
-
-
-
-
-                                            <div class="form-row" style="margin-top: 20px;">
-
-
-                                            
-                                                <div class="col-6">
-                                                    <label>Cover Image</label>
-                                                    <input type="file" class="form-control" name="icon" placeholder="Listing Name">
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <label>Listing Images</label>
-                                                    <input type="file" class="form-control" name="image" placeholder="Listing Name" multiple>
-                                                </div>
-                                              
-                                            </div>
-
-
-
-
                                <button class="btn btn-primary" type="submit" style="margin-top:20px;float:right">Save</button>
 
                                         </form>
@@ -155,7 +81,7 @@
                     <div class="col-12">
     <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back1" style="margin:10px">Back</button></span>Edit Data</h6>
 
-                        <h3 class="content-heading mt-3">New Listing    <span style="float: right;cursor: pointer;color:#1f5ab0;" id="show">Show All</span></h3>
+                        <h3 class="content-heading mt-3">New Brochure    <span style="float: right;cursor: pointer;color:#1f5ab0;" id="show">Show All</span></h3>
 
                     </div>
                    
@@ -163,85 +89,20 @@
                         <div class="card">
                             <div class="card-body">    
                                     <div class="basic-form">
-
-                                        <input type="hidden" class="form-control" id="pid" readonly>
-
-
-
-                                        <div class="form-row">
+                                               <div class="form-row">
+                                                <input type="hidden" class="form-control" id="pid" readonly>
+                                                <div class="col-6">
+                                                    <label>Listing</label>
+                                                    <select name="pcountryid" id="pcountryid" class="form-control"></select>
+                                                </div>
+                                             
+                                                <div class="col-6">
+                                                    <label>Brochure Name</label>
+                                                    <input type="text" class="form-control" id="pname" placeholder="Brochure Name">
+                                                </div>
+                                               
                                               
-                                            <div class="col-6">
-                                                <label>Country Name</label>
-                                               <select name="pcountryid" id="pcountryid" class="form-control"></select>
                                             </div>
-
-                                            <div class="col-6">
-                                                <label>State Name</label>
-                                               <select name="pstateid" id="pstateid" class="form-control"></select>
-                                            </div>
-
-                                        </div>
-
-
-
-
-                                        <div class="form-row" style="margin-top: 20px;">
-                                          
-                                            <div class="col-6">
-                                                <label>Developers Name</label>
-                                               <select name="pdevelopersid" id="pdevelopersid" class="form-control"></select>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <label>Projects Name</label>
-                                               <select name="pprojectid" id="pprojectid" class="form-control"></select>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="form-row" style="margin-top: 20px;">
-
-
-                                            <div class="col-4">
-                                                <label>Agent Name</label>
-                                               <select name="pagentid" id="pagentid" class="form-control"></select>
-                                            </div>
-                                          
-
-                                            <div class="col-4">
-                                                <label>Property Type</label>
-                                               <select name="propertytypeid" id="ppropertytypeid" class="form-control"></select>
-                                            </div>
-
-                                            <div class="col-4">
-                                                <label>Listing Name</label>
-                                                <input type="text" class="form-control" name="pname" id="pname" placeholder="Listing Name">
-                                            </div>
-                                        
-                                         
-                                        </div>
-
-
-
-                                        <div class="form-row" style="margin-top: 20px;">
-
-                                            <div class="col-6">
-                                                <label>Description</label>
-                                                <textarea name="pdescription" id="pdescription"  class="form-control" placeholder="Listing Description"></textarea>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <label>Address</label>
-                                                <textarea name="paddress" id="paddress"  class="form-control" placeholder="Address"></textarea>
-                                            </div>
-                                          
-                                        </div>
-
-                                        <label style="margin-top:20px ;">Amenities</label><br/>
-
-                                        <div id="pamenities" class="pamenities"></div>
-
 
 
 
@@ -269,7 +130,7 @@
                     <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back2" style="margin:10px">Back</button></span> Upload Image</h6>
                     <div class="card-body">
                     
-                        <form action="/admin/dashboard/store-listing/listing/update-image" method="POST" enctype="multipart/form-data">
+                        <form action="/admin/dashboard/store-listing/brochure/update-image" method="POST" enctype="multipart/form-data">
                             <div class="form-row">
                        
                                 <div class="form-group col-md-6 col-lg-6">
@@ -284,7 +145,7 @@
 
                             <div class="form-group col-md-6 col-lg-6">
                                 <label class="form-label">Icon</label>
-                                <input type="file" class="form-control" name='icon' placeholder="Password">
+                                <input type="file" class="form-control" name='image' placeholder="Password">
                                 <div class="clearfix"></div>
                                 </div>
                                 </div>
@@ -556,7 +417,7 @@
 
 
 
-<script src="/javascripts/listing.js"></script>
+<script src="/javascripts/brochure.js"></script>
 
 
 

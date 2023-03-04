@@ -5,6 +5,7 @@ let state = []
 let developers = []
 let projects = []
 let agent = []
+let propertytype = []
 
 let table = '/admin/dashboard/store-listing/listing'
 
@@ -13,6 +14,13 @@ let table = '/admin/dashboard/store-listing/listing'
 $.getJSON(`/api/get-country`, data => {
     subcategories = data
     fillDropDown('countryid',data, 'Choose Country', 0)
+})
+
+
+
+$.getJSON(`/api/get-property_type`, data => {
+    propertytype = data
+    fillDropDown('propertytypeid',data, 'Choose Property Type', 0)
 })
 
 
@@ -289,6 +297,9 @@ $('#result').on('click', '.edits', function() {
     const id = $(this).attr('id')
     const result = categories.find(item => item.id == id);
     fillDropDown('pcountryid', subcategories, 'Choose Country', result.countryid)
+    fillDropDown('ppropertytypeid', propertytype, 'Choose Property Type', result.propertytypeid)
+
+    
     $('#pstateid').append($('<option>').val(result.stateid).text(result.statename))
     $('#pdevelopersid').append($('<option>').val(result.developersid).text(result.developername))
     $('#pprojectid').append($('<option>').val(result.projectid).text(result.projectname))
@@ -365,6 +376,8 @@ $('#update').click(function(){  //data insert in database
         agentid : $('#pagentid').val(),
         description : $('#pdescription').val(),
         address : $('#paddress').val(),
+        propertytypeid : $('#ppropertytypeid').val(),
+
         
 
        

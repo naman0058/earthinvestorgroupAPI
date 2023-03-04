@@ -1,13 +1,13 @@
 let categories = []
 let subcategories = []
 
-let table = '/admin/dashboard/store-listing/developers'
+let table = '/admin/dashboard/store-listing/review'
 
 
 
-$.getJSON(`/api/get-country`, data => {
+$.getJSON(`/api/get-listing`, data => {
     subcategories = data
-    fillDropDown('countryid',data, 'Choose Country', 0)
+    fillDropDown('countryid',data, 'Choose Listing', 0)
 })
 
 
@@ -29,7 +29,7 @@ function fillDropDown(id, data, label, selectedid = 0) {
 
 $('#show').click(function(){
 
-$.getJSON('/api/get-developers',data=>{
+$.getJSON('/api/get-review',data=>{
     categories = data
     makeTable(data)
 })
@@ -45,9 +45,12 @@ function makeTable(categories){
 <table id="report-table" class="table  table-striped mb-0">
 <thead>
 <tr>
-<th>Icon</th>
+<th>Image</th>
+<th>Listing</th>
 <th>Name</th>
-<th>Country Name</th>
+<th>Rating</th>
+<th>Review</th>
+
 <th>Options</th>
 </tr>
 </thead>
@@ -57,13 +60,17 @@ $.each(categories,(i,item)=>{
 table+=`<tr>
 
 <td>
-<img src="/images/${item.icon}" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
+<img src="/images/${item.image}" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
 </td>
+<td>${item.listingname}</td>
 <td>${item.name}</td>
-<td>${item.countryname}</td>
+<td>${item.rating}</td>
+<td>${item.review}</td>
+
 
 <td>
 <a href="#!" class="btn btn-info btn-sm edits" id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+
 <a href="#!" class="btn btn-info btn-sm updateimage"  id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit Image </a>
 <a href="#!" class="btn btn-danger btn-sm deleted" id="${item.id}"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
 </td>
@@ -96,7 +103,7 @@ $('#result').on('click', '.deleted', function() {
 $('#result').on('click', '.edits', function() {
     const id = $(this).attr('id')
     const result = categories.find(item => item.id == id);
-    fillDropDown('pcountryid', subcategories, 'Choose Country', result.countryid)
+    fillDropDown('pcountryid', subcategories, 'Choose Country', result.listingid)
   
 
     $('#editdiv').show()
@@ -104,7 +111,9 @@ $('#result').on('click', '.edits', function() {
     $('#insertdiv').hide() 
     $('#pid').val(result.id)
      $('#pname').val(result.name)
-     $('#pdescription').val(result.description)
+
+     $('#prating').val(result.rating)
+     $('#preview').val(result.review)
 
 
    
@@ -125,8 +134,9 @@ $('#update').click(function(){  //data insert in database
     let updateobj = {
         id: $('#pid').val(),
         name: $('#pname').val(),
-        countryid : $('#pcountryid').val(),
-        description : $('#pdescription').val()
+        listingid : $('#pcountryid').val(),
+        rating : $('#prating').val(),
+        review : $('#preview').val(),
 
        
         }
@@ -145,7 +155,7 @@ $('#update').click(function(){  //data insert in database
 
 function refresh() 
 {
-    $.getJSON('/api/get-developers',data=>{
+    $.getJSON('/api/get-review',data=>{
         makeTable(data)
     })
 }

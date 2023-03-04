@@ -48,6 +48,7 @@ router.get('/dashboard/:name', (req, res) => {
 
 router.post('/dashboard/store-listing/:name/insert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'icon', maxCount: 8 } ,  { name: 'single_event_image', maxCount: 8 } , { name: 'tree_image', maxCount: 8 } ]),(req,res)=>{
   let body = req.body
+  body['date'] = sending.date_and_time()
 
 
   if(req.files.single_event_image){
@@ -178,6 +179,7 @@ pool.query(`update ${req.params.name} set ? where id = ?`, [req.body, req.body.i
 
 router.post('/listing/insert',upload.fields([{ name: 'icon', maxCount: 1 }, { name: 'image', maxCount: 100 }  ]),(req,res)=>{
   let body = req.body
+  body['date'] = sending.date_and_time()
 
 
 console.log('icon',req.body);

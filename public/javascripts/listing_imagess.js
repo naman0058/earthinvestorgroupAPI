@@ -45,7 +45,7 @@ function makeTable(categories){
 <table id="report-table" class="table  table-striped mb-0">
 <thead>
 <tr>
-<th>Icon</th>
+<th>Image</th>
 <th>Listing</th>
 <th>Options</th>
 </tr>
