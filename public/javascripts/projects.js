@@ -1,6 +1,7 @@
 let categories = []
 let subcategories = []
 let developers = []
+let state = []
 
 let table = '/admin/dashboard/store-listing/projects'
 
@@ -20,6 +21,21 @@ $.getJSON(`/api/get-developers`, data => {
 $('#countryid').change(() => {
     const filteredData = developers.filter(item => item.countryid == $('#countryid').val())
     fillDropDown('developersid', filteredData, 'Choose Developers', 0)
+})
+
+
+
+
+
+$.getJSON(`/api/get-state`, data => {
+    state = data
+    fillDropDown('stateid', [], 'Choose State', 0)
+})
+
+$('#countryid').change(() => {
+    const filteredData = state.filter(item => item.countryid == $('#countryid').val())
+    fillDropDown('stateid', filteredData, 'Choose State', 0)
+    
 })
 
 
@@ -61,8 +77,9 @@ function makeTable(categories){
 <th>Icon</th>
 <th>Name</th>
 <th>Country Name</th>
-<th>Developer Name</th>
+<th>State Name</th>
 
+<th>Developer Name</th>
 <th>Options</th>
 </tr>
 </thead>
@@ -76,7 +93,10 @@ table+=`<tr>
 </td>
 <td>${item.name}</td>
 <td>${item.countryname}</td>
+<td>${item.statename}</td>
+
 <td>${item.developername}</td>
+
 
 
 <td>
@@ -110,6 +130,13 @@ $('#result').on('click', '.deleted', function() {
 
 
 
+
+$('#pcountryid').change(() => {
+    const filteredData = state.filter(item => item.countryid == $('#pcountryid').val())
+    fillDropDown('pstateid', filteredData, 'Choose State', 0)
+})
+
+
 $('#pcountryid').change(() => {
     const filteredData = developers.filter(item => item.countryid == $('#pcountryid').val())
     fillDropDown('pdevelopersid', filteredData, 'Choose Developers', 0)
@@ -122,6 +149,8 @@ $('#result').on('click', '.edits', function() {
     const result = categories.find(item => item.id == id);
     fillDropDown('pcountryid', subcategories, 'Choose Country', result.countryid)
     $('#pdevelopersid').append($('<option>').val(result.developersid).text(result.developername))
+    $('#pstateid').append($('<option>').val(result.stateid).text(result.statename))
+
 
   
 
@@ -130,6 +159,8 @@ $('#result').on('click', '.edits', function() {
     $('#insertdiv').hide() 
     $('#pid').val(result.id)
      $('#pname').val(result.name)
+     $('#pstateid').val(result.stateid)
+
      $('#pdevelopersid').val(result.developersid)
 
 
@@ -152,9 +183,8 @@ $('#update').click(function(){  //data insert in database
         id: $('#pid').val(),
         name: $('#pname').val(),
         countryid : $('#pcountryid').val(),
-        developersid : $('#pdevelopersid').val()
-
-       
+        developersid : $('#pdevelopersid').val(),
+        stateid : $('#pstateid').val()
         }
 
 

@@ -365,7 +365,7 @@ $('#update').click(function(){  //data insert in database
         agentid : $('#pagentid').val(),
         description : $('#pdescription').val(),
         address : $('#paddress').val(),
-        b
+        
 
        
         }
