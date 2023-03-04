@@ -21,6 +21,15 @@ router.get('/get-amenities',(req,res)=>{
 })
 
 
+
+router.get('/get-property_type',(req,res)=>{
+    pool.query(`select * from property_type order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
 router.get('/get-state',(req,res)=>{
     pool.query(`select s.* , (select c.name from country c where c.id = s.countryid) as countryname from state s order by id desc`,(err,result)=>{
         if(err) throw err;

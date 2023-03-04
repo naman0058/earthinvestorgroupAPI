@@ -122,8 +122,8 @@ function makeDropdown(data){
    `
     $.each(data,(i,item)=>{
 
-    table+=`<div class="col-1">
-<input type="checkbox" name="checkboxes[]"  id="checkboxes[]" value='${item.name}'>${item.name}
+    table+=`<div class="col-2" style='margin-top:20px'>
+<input type="checkbox" name="checkboxes[]"  id="checkboxes[]" value='${item.name}'> &nbsp; ${item.name}
     </div>`
     })
    table+=`</div>`
@@ -155,16 +155,16 @@ function makeDropdown1(amenities,data){
    `
     $.each(matchresult,(i,item)=>{
 
-    table+=`<div class="col-1">`
-table+=`<input type="checkbox" name="updated_checkboxes[]"  id="updated_checkboxes" class='a' checked  value='${item.name}'>${item.name}
+    table+=`<div class="col-2"  style='margin-top:20px'>`
+table+=`<input type="checkbox" name="updated_checkboxes[]"  id="updated_checkboxes" class='a' checked  value='${item.name}'> &nbsp; ${item.name}
 </div>`
     })
 
 
     $.each(unmatchresult,(i,item)=>{
 
-        table+=`<div class="col-1">`
-    table+=`<input type="checkbox" name="updated_checkboxes[]"  id="updated_checkboxes" class='a'  value='${item.name}'>${item.name}
+        table+=`<div class="col-2"  style='margin-top:20px'>`
+    table+=`<input type="checkbox" name="updated_checkboxes[]"  id="updated_checkboxes" class='a'  value='${item.name}'> &nbsp; ${item.name}
     </div>`
         })
 
