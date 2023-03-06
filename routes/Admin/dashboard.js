@@ -73,8 +73,18 @@ else if(req.files.image){
      err ? console.log(err) : res.json({msg : 'success'})
  })
 }
-else {
+
+else if(req.files.image){
   body['icon'] = req.files.icon[0].filename;
+console.log(req.body)
+ pool.query(`insert into ${req.params.name} set ?`,body,(err,result)=>{
+     err ? console.log(err) : res.json({msg : 'success'})
+ })
+}
+
+
+
+else {
 console.log(req.body)
  pool.query(`insert into ${req.params.name} set ?`,body,(err,result)=>{
      err ? console.log(err) : res.json({msg : 'success'})

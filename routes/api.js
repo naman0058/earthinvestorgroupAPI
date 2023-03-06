@@ -119,4 +119,13 @@ router.get('/get-review',(req,res)=>{
 })
 
 
+
+router.get('/get-notes',(req,res)=>{
+    pool.query(`select l.* , (select li.name from listing li where li.id = l.listingid) as listingname from notes l order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
 module.exports = router
