@@ -211,7 +211,13 @@ router.get('/listing-by-state',(req,res)=>{
 
 
 router.get('/listing-details',(req,res)=>{
-    var query = `select * from listing where id = '${req.query.id}';`
+    var query = `select l.* 
+    (select c.name from country c where c.id = l.countryid) as countryname,
+    (select s.name from state s where s.id = l.stateid) as statename,
+    (select d.name from developers d where d.id = l.developersid) as developername,
+    (select p.name from projects p where p.id = l.projectid) as projectname,
+    (select a.name from agent a where a.id = l.agentid) as agentname
+    from listing l where l.id = '${req.query.id}';`
     var query1 = `select * from listing_imagess where listingid = '${req.query.id}';`
     var query2 = `select * from listing_amenities where listingid = '${req.query.id}';`
     var query3 = `select * from review where listingid = '${req.query.id}';`
