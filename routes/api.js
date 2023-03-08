@@ -13,6 +13,14 @@ router.get('/get-country',(req,res)=>{
 })
 
 
+router.get('/get-state-country-wise',(req,res)=>{
+    pool.query(`select s.* , (select c.name from country c where c.id = s.countryid) as countryname from state s where s.countryid = '${req.query.countryid}' order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
 router.get('/get-amenities',(req,res)=>{
     pool.query(`select * from amenities order by id desc`,(err,result)=>{
         if(err) throw err;
