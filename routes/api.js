@@ -164,7 +164,7 @@ router.get('/listing-by-developers',(req,res)=>{
 
 
 router.get('/projects-by-developers',(req,res)=>{
-    pool.query(`select l.* ,
+    pool.query(`select l.*
      from projects l where l.developersid = (select d.id from developers d where d.seo_name = '${req.query.developer_name}') order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
