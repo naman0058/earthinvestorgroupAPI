@@ -144,4 +144,99 @@ router.get('/get-notes',(req,res)=>{
 })
 
 
+
+
+
+router.get('/listing-by-developers',(req,res)=>{
+    pool.query(`select l.* ,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 1) as listingimage1,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 1,1) as listingimage2,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3
+     from listing l where l.developersid = (select d.id from developers d where d.seo_name = '${req.query.developer_name}') order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
+
+router.get('/projects-by-developers',(req,res)=>{
+    pool.query(`select l.* ,
+     from projects l where l.developersid = (select d.id from developers d where d.seo_name = '${req.query.developer_name}') order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
+
+
+
+
+
+// router.get('/listing-by-projects',(req,res)=>{
+//     pool.query(`select l.* ,
+//    (select i.image from listing_imagess i where i.listingid = l.id limit 1) as listingimage1,
+//    (select i.image from listing_imagess i where i.listingid = l.id limit 1,1) as listingimage2,
+//    (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
+//    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
+//    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
+//    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3
+//      from listing l where l.projectid = (select d.id from projects d where d.seo_name = '${req.query.project_name}') order by id desc`,(err,result)=>{
+//         if(err) throw err;
+//         else res.json(result);
+//     })
+// })
+
+
+
+router.get('/listing-by-state',(req,res)=>{
+    pool.query(`select l.* ,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 1) as listingimage1,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 1,1) as listingimage2,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3
+     from listing l where l.stateid = (select d.id from state d where d.seo_name = '${req.query.state_name}') order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
+
+
+router.get('/listing-details',(req,res)=>{
+    var query = `select * from listing where id = '${req.query.id}';`
+    var query1 = `select * from listing_imagess where listingid = '${req.query.id}';`
+    var query2 = `select * from listing_amenities where listingid = '${req.query.id}';`
+    var query3 = `select * from review where listingid = '${req.query.id}';`
+    var query4 = `select * from brochure where listingid = '${req.query.id}';`
+    pool.query(query+query1+query2+query3+query4,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+
+
+    
+
+})
+
+
+router.post('/enquiry_submit',(req,res)=>{
+    let body = req.body;
+    body['date'] = sending.date_and_time()
+    pool.query(`insert into enquiry set ?`,body,(err,result)=>{
+        if(err) throw err;
+        else {
+            res.json({msg:'success'})
+        }
+    })
+})
+
+
 module.exports = router
