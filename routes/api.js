@@ -54,6 +54,14 @@ router.get('/get-developers',(req,res)=>{
 })
 
 
+router.get('/get-developers-country-wise',(req,res)=>{
+    pool.query(`select d.* , (select c.name from country c where c.id = d.countryid) as countryname from developers d where d.countryid = '${req.query.countryid}' order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
 
 router.get('/get-projects',(req,res)=>{
     pool.query(`select p.* ,
