@@ -211,7 +211,7 @@ router.get('/listing-by-state',(req,res)=>{
 
 
 router.get('/listing-details',(req,res)=>{
-    var query = `select l.* 
+    var query = `select l.*,
     (select c.name from country c where c.id = l.countryid) as countryname,
     (select s.name from state s where s.id = l.stateid) as statename,
     (select d.name from developers d where d.id = l.developersid) as developername,
