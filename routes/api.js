@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pool =  require('./pool');
 var sending = require('./msg_function');
+const { reset } = require('nodemon');
 
 
 
@@ -241,6 +242,34 @@ router.post('/enquiry_submit',(req,res)=>{
         else {
             res.json({msg:'success'})
         }
+    })
+})
+
+
+
+router.get('/top-10-agent/:name',(req,res)=>{
+    if(req.params.name == 'all'){
+   pool.query(`select * from agent order by id limit 10`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result)
+   })
+    }
+    else{
+    pool.query(`select * from agent where countryid = (select c.id from country c where c.name = '${req.params.name}') order by id limit 10`,(err,result)=>{
+        if(err) throw err;
+        else {
+            res.json(result)
+        }
+    })
+    }
+})
+
+
+
+router.get('/featured/state',(req,res)=>{
+    pool.query(`select * from state where isFeatured == 'yes' limit 4 order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
     })
 })
 
