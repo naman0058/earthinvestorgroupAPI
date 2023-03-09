@@ -247,6 +247,20 @@ router.post('/enquiry_submit',(req,res)=>{
 
 
 
+router.post('/contact_submit',(req,res)=>{
+    let body = req.body;
+    body['date'] = sending.date_and_time()
+    pool.query(`insert into contact set ?`,body,(err,result)=>{
+        if(err) throw err;
+        else {
+            res.json({msg:'success'})
+        }
+    })
+})
+
+
+
+
 router.get('/top-10-agent/:name',(req,res)=>{
     if(req.params.name == 'all'){
    pool.query(`select * from agent order by id limit 10`,(err,result)=>{
