@@ -267,7 +267,7 @@ router.get('/top-10-agent/:name',(req,res)=>{
 
 
 router.get('/featured/state',(req,res)=>{
-    pool.query(`select * from state where isFeatured == 'yes' limit 4 order by id desc`,(err,result)=>{
+    pool.query(`select * from state where isFeatured = 'yes' limit 4 order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
     })
