@@ -155,7 +155,14 @@ router.get('/listing-by-developers',(req,res)=>{
    (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
-   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3,
+
+
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1)) as listing_amenitiesicon1,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1)) as listing_amenitiesicon2,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1)) as listing_amenitiesicon3
+
+
      from listing l where l.developersid = (select d.id from developers d where d.seo_name = '${req.query.developer_name}') order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
@@ -185,7 +192,11 @@ router.get('/listing-by-property-type',(req,res)=>{
    (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
-   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1)) as listing_amenitiesicon1,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1)) as listing_amenitiesicon2,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1)) as listing_amenitiesicon3
+
      from listing l where l.propertytypeid = (select d.id from property_type d where d.seo_name = '${req.query.property_type}') order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
@@ -201,7 +212,11 @@ router.get('/listing-by-state',(req,res)=>{
    (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
-   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1)) as listing_amenitiesicon1,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1)) as listing_amenitiesicon2,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1)) as listing_amenitiesicon3
+
      from listing l where l.stateid = (select d.id from state d where d.seo_name = '${req.query.state_name}') order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
@@ -220,7 +235,7 @@ router.get('/listing-details',(req,res)=>{
     (select a.name from agent a where a.id = l.agentid) as agentname
     from listing l where l.id = '${req.query.id}';`
     var query1 = `select * from listing_imagess where listingid = '${req.query.id}';`
-    var query2 = `select * from listing_amenities where listingid = '${req.query.id}';`
+    var query2 = `select l.* , (select a.icon from amenities a where a.name = l.amenitiesid) as amenities_icon from listing_amenities l where l.listingid = '${req.query.id}';`
     var query3 = `select * from review where listingid = '${req.query.id}';`
     var query4 = `select * from brochure where listingid = '${req.query.id}';`
     pool.query(query+query1+query2+query3+query4,(err,result)=>{
