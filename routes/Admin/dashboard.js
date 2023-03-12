@@ -196,9 +196,9 @@ console.log('icon',req.body);
 
 
 
-pool.query(`insert into listing(countryid,stateid,developersid,projectid,agentid,name,description,address,icon) 
+pool.query(`insert into listing(countryid,stateid,developersid,projectid,agentid,name,description,address,icon,date,propertytypeid) 
 values('${body.countryid}' , '${body.stateid}' , '${body.developersid}' , '${body.projectid}' , '${body.agentid}' , '${body.name}' , 
-'${body.description}' , '${body.address}' , '${req.files.icon[0].filename}')`,(err,result)=>{
+'${body.description}' , '${body.address}' , '${req.files.icon[0].filename}', '${req.body.date}' , '${req.body.propertytypeid}')`,(err,result)=>{
     if(err) throw err;
     else {
       console.log(result.insertId)
@@ -206,7 +206,7 @@ values('${body.countryid}' , '${body.stateid}' , '${body.developersid}' , '${bod
       
 
       for(i=0;i<body.checkboxes.length;i++){
-        pool.query(`insert into listing_amenities(listingid , amenitiesid) values('${insertid}' , '${body.checkboxes[i]}')`,(err,result)=>{
+        pool.query(`insert into listing_amenities(listingid , amenitiesid,date) values('${insertid}' , '${body.checkboxes[i]}','${req.body.date}')`,(err,result)=>{
           if(err) throw err;
           else {console.log('done')}
         })
@@ -214,7 +214,7 @@ values('${body.countryid}' , '${body.stateid}' , '${body.developersid}' , '${bod
 
 
       for(i=0;i<req.files.image.length;i++){
-        pool.query(`insert into listing_imagess(listingid , image) values('${insertid}' , '${req.files.image[i].filename}')`,(err,result)=>{
+        pool.query(`insert into listing_imagess(listingid , image,date) values('${insertid}' , '${req.files.image[i].filename}' , '${req.body.date}')`,(err,result)=>{
           if(err) throw err;
           else {console.log('done')}
         })

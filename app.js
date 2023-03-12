@@ -16,6 +16,7 @@ var project = require('./routes/Admin/project');
 var property = require('./routes/Admin/property');
 var api = require('./routes/api');
 const { count } = require('console');
+var cors = require('cors')
 
 
 
@@ -45,7 +46,7 @@ app.use(cookieSession({
 }))
 
 
-
+app.use(cors())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
