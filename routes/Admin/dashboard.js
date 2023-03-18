@@ -74,7 +74,7 @@ else if(req.files.image){
  })
 }
 
-else if(req.files.image){
+else if(req.files.icon){
   body['icon'] = req.files.icon[0].filename;
 console.log(req.body)
  pool.query(`insert into ${req.params.name} set ?`,body,(err,result)=>{
