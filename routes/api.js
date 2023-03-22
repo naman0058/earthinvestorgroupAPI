@@ -306,6 +306,13 @@ router.get('/featured/state',(req,res)=>{
 
 
 
+router.post('/search',(req,res)=>{
+    pool.query(`select * from listing where stateid = '${req.body.stateid}' and propertytypeid in ('${req.body.property_typeid}') and price >= '${req.body.min_price}' and price <= '${req.body.max_price}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
 
 
 
