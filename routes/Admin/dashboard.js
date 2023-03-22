@@ -238,39 +238,40 @@ values('${body.countryid}' , '${body.stateid}' , '${body.developersid}' , '${bod
 router.post('/listing/update',(req,res)=>{
   let body = req.body
 
+console.log(req.body)
   let a = JSON.parse(req.body.b)
 
 
 
 
-pool.query(`update listing set countryid = '${body.countryid}' ,stateid = '${body.stateid}' ,developersid = '${body.developersid}' ,
-projectid = '${body.projectid}' ,agentid = '${body.agentid}' ,name = '${body.name}' ,description = '${body.description}' ,
-address = '${body.address}' where id = '${body.id}'`,(err,result)=>{
-    if(err) throw err;
-    else {
+// pool.query(`update listing set countryid = '${body.countryid}' ,stateid = '${body.stateid}' ,developersid = '${body.developersid}' ,
+// projectid = '${body.projectid}' ,agentid = '${body.agentid}' ,name = '${body.name}' ,description = '${body.description}' ,
+// address = '${body.address}' where id = '${body.id}'`,(err,result)=>{
+//     if(err) throw err;
+//     else {
 
-      pool.query(`delete from listing_amenities where listingid = '${body.id}'`,(err,result)=>{
-        if(err) throw err;
-        else {
-          for(i=0;i<a.length;i++){
-
-
+//       pool.query(`delete from listing_amenities where listingid = '${body.id}'`,(err,result)=>{
+//         if(err) throw err;
+//         else {
+//           for(i=0;i<a.length;i++){
 
 
-            pool.query(`insert into listing_amenities(listingid , amenitiesid) values('${body.id}' , '${a[i]}')`,(err,result)=>{
-              if(err) throw err;
-              else {console.log('done')}
-            })
-          }
-        }
-res.json({msg:'success'})
 
-      })
+
+//             pool.query(`insert into listing_amenities(listingid , amenitiesid) values('${body.id}' , '${a[i]}')`,(err,result)=>{
+//               if(err) throw err;
+//               else {console.log('done')}
+//             })
+//           }
+//         }
+// res.json({msg:'success'})
+
+//       })
 
      
 
-    }
-})
+//     }
+// })
 
 
 

@@ -150,8 +150,8 @@ function makeDropdown1(amenities,data){
     console.log('data',data.includes(amenities[0].name))
     console.log('amenties',amenities[0].name)
 
-    let matchresult = amenities.filter(({ id: id1 }) => data.some(({ amenitiesid: id2 }) => id2 === id1))
-    let unmatchresult = amenities.filter(({ id: id1 }) => !data.some(({ amenitiesid: id2 }) => id2 === id1))
+    let matchresult = amenities.filter(({ name: id1 }) => data.some(({ amenitiesid: id2 }) => id2 === id1))
+    let unmatchresult = amenities.filter(({ name: id1 }) => !data.some(({ amenitiesid: id2 }) => id2 === id1))
 
 
     console.log('matchresult',matchresult)
@@ -377,6 +377,7 @@ $('#update').click(function(){  //data insert in database
         description : $('#pdescription').val(),
         address : $('#paddress').val(),
         propertytypeid : $('#ppropertytypeid').val(),
+        b 
 
         
 
