@@ -307,7 +307,19 @@ router.get('/featured/state',(req,res)=>{
 
 
 router.post('/search',(req,res)=>{
-    pool.query(`select * from listing where stateid = '${req.body.stateid}' and propertytypeid in ('${req.body.property_typeid}') and price >= '${req.body.min_price}' and price <= '${req.body.max_price}'`,(err,result)=>{
+    console.log(`select * from listing where stateid = '${req.body.stateid}' and propertytypeid in (${req.body.property_typeid}) and price >= ${req.body.min_price} and price <= ${req.body.max_price}`)
+    pool.query(`select l.* ,
+    (select i.image from listing_imagess i where i.listingid = l.id limit 1) as listingimage1,
+    (select i.image from listing_imagess i where i.listingid = l.id limit 1,1) as listingimage2,
+    (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
+    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
+    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
+    (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3,
+    (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1)) as listing_amenitiesicon1,
+    (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1)) as listing_amenitiesicon2,
+    (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1)) as listing_amenitiesicon3
+    from listing l 
+    where l.stateid = '${req.body.stateid}' and l.propertytypeid in (${req.body.property_typeid}) and l.price >= ${req.body.min_price} and l.price <= ${req.body.max_price}`,(err,result)=>{
         if(err) throw err;
         else res.json(result);
     })
