@@ -307,8 +307,9 @@ router.get('/featured/state',(req,res)=>{
 
 
 router.post('/search',(req,res)=>{
-    console.log(`select * from listing where stateid = '${req.body.stateid}' and propertytypeid in (${req.body.property_typeid}) and price >= ${req.body.min_price} and price <= ${req.body.max_price}`)
+    // console.log(`select * from listing where stateid = '${req.body.stateid}' and propertytypeid in (${req.body.property_typeid}) and price >= ${req.body.min_price} and price <= ${req.body.max_price}`)
     pool.query(`select l.* ,
+    (select s.name from state s where s.id = l.stateid) as statename,
     (select i.image from listing_imagess i where i.listingid = l.id limit 1) as listingimage1,
     (select i.image from listing_imagess i where i.listingid = l.id limit 1,1) as listingimage2,
     (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
