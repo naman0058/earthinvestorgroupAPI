@@ -233,6 +233,10 @@ router.get('/listing-details',(req,res)=>{
     (select d.name from developers d where d.id = l.developersid) as developername,
     (select d.description from developers d where d.id = l.developersid) as developer_description,
     (select d.seo_name from developers d where d.id = l.developersid) as developer_seo_name,
+
+    (select d.icon from developers d where d.id = l.developersid) as developer_image,
+
+
     (select p.name from projects p where p.id = l.projectid) as projectname,
     (select a.name from agent a where a.id = l.agentid) as agentname
     from listing l where l.id = '${req.query.id}';`
