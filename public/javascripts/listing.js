@@ -210,6 +210,9 @@ function makeTable(categories){
 <th>Developers Name</th>
 <th>Project Name</th>
 <th>Agent Name</th>
+<th>Address</th>
+<th>Property Type</th>
+
 
 <th>Options</th>
 </tr>
@@ -228,6 +231,11 @@ table+=`<tr>
 <td>${item.developername}</td>
 <td>${item.projectname}</td>
 <td>${item.agentname}</td>
+<td>${item.address}</td>
+<td>${item.propert_type_name}</td>
+
+
+
 
 
 <td>

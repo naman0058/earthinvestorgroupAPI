@@ -92,7 +92,8 @@ router.get('/get-listing',(req,res)=>{
     (select s.name from state s where s.id = l.stateid) as statename,
     (select d.name from developers d where d.id = l.developersid) as developername,
     (select p.name from projects p where p.id = l.projectid) as projectname,
-    (select a.name from agent a where a.id = l.agentid) as agentname
+    (select a.name from agent a where a.id = l.agentid) as agentname,
+    (select p.name from property_type p where p.id = l.propertytypeid) as propert_type_name
 
      from listing l order by id desc`,(err,result)=>{
         if(err) throw err;
