@@ -210,7 +210,7 @@ function makeTable(categories){
 <th>Developers Name</th>
 <th>Project Name</th>
 <th>Agent Name</th>
-<th>Address</th>
+<th>Location</th>
 <th>Property Type</th>
 
 
