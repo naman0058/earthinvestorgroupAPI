@@ -172,6 +172,11 @@ router.get('/listing-by-developers',(req,res)=>{
 
 
 
+
+
+
+
+
 router.get('/projects-by-developers',(req,res)=>{
     pool.query(`select l.*
      from projects l where l.developersid = (select d.id from developers d where d.seo_name = '${req.query.developer_name}') order by id desc`,(err,result)=>{
@@ -180,6 +185,37 @@ router.get('/projects-by-developers',(req,res)=>{
     })
 })
 
+
+
+router.get('/projects-by-state',(req,res)=>{
+    pool.query(`select l.*
+     from projects l where l.stateid = (select d.id from state d where d.seo_name = '${req.query.state_name}') order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
+
+
+
+
+
+router.get('/listing-by-project-type',(req,res)=>{
+    pool.query(`select l.* ,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 1) as listingimage1,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 1,1) as listingimage2,
+   (select i.image from listing_imagess i where i.listingid = l.id limit 2,1) as listingimage3,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1) as listing_amenities1,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1) as listing_amenities2,
+   (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1) as listing_amenities3,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1)) as listing_amenitiesicon1,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 1,1)) as listing_amenitiesicon2,
+   (select i.icon from amenities i where i.name = (select i.amenitiesid from listing_amenities i where i.listingid = l.id limit 2,1)) as listing_amenitiesicon3
+
+     from listing l where l.projectid = (select d.id from property_type d where d.seo_name = '${req.query.project_name}') order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
 
 
 
