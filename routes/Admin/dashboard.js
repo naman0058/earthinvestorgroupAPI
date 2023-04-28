@@ -246,7 +246,7 @@ console.log(req.body)
 
 pool.query(`update listing set countryid = '${body.countryid}' ,stateid = '${body.stateid}' ,developersid = '${body.developersid}' ,
 projectid = '${body.projectid}' ,agentid = '${body.agentid}' ,name = '${body.name}' ,description = '${body.description}' ,
-address = '${body.address}' where id = '${body.id}'`,(err,result)=>{
+address = '${body.address}' , propertytypeid = '${body.propertytypeid}' where id = '${body.id}'`,(err,result)=>{
     if(err) throw err;
     else {
 
