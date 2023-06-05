@@ -77,6 +77,23 @@
                                             </div>
 
 
+                                            <div class="form-row" style="margin-top: 20px;">
+
+                                                <div class="col-6">
+                                                    <label>Currency</label>
+                                                    <input type="text" class="form-control" name="currency" id="currency" placeholder="Currency">
+    
+                                                </div>
+    
+                                                <div class="col-6">
+                                                    <label>Price</label>
+                                                    <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+    
+                                                </div>
+                                              
+                                            </div>
+
+
 
                                             <div class="form-row" style="margin-top: 20px;">
 
@@ -105,13 +122,17 @@
                                             <div class="form-row" style="margin-top: 20px;">
 
 
+                                                <div class="col-4">
+                                                    <label>Video</label>
+                                                    <input type="file" class="form-control" name="video" placeholder="Listing Name">
+                                                </div>
                                             
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <label>Cover Image</label>
                                                     <input type="file" class="form-control" name="icon" placeholder="Listing Name">
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <label>Listing Images</label>
                                                     <input type="file" class="form-control" name="image" placeholder="Listing Name" multiple>
                                                 </div>
@@ -223,6 +244,22 @@
                                         </div>
 
 
+                                        <div class="form-row" style="margin-top: 20px;">
+
+                                            <div class="col-6">
+                                                <label>Currency</label>
+                                                <input type="text" class="form-control" name="pcurrency" id="pcurrency" placeholder="Currency">
+
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label>Price</label>
+                                                <input type="text" class="form-control" name="pprice" id="pprice" placeholder="Price">
+
+                                            </div>
+                                          
+                                        </div>
+
 
                                         <div class="form-row" style="margin-top: 20px;">
 
@@ -294,6 +331,39 @@
                             </form>
                     </div>
                     </div>
+
+
+
+
+                    <div class="card mb-4" id="updatevideodiv">
+                        <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back3" style="margin:10px">Back</button></span> Upload Image</h6>
+                        <div class="card-body">
+                        
+                            <form action="/admin/dashboard/store-listing/listing/update-video" method="POST" enctype="multipart/form-data">
+                                <div class="form-row">
+                           
+                                    <div class="form-group col-md-6 col-lg-6">
+                                        <label class="form-label">ID</label>
+                                        <input type="text" class="form-control" placeholder="Email" id="peid1" name="id" readonly>
+                                        <div class="clearfix"></div>
+                                        </div>
+                        
+                        
+    
+    
+    
+                                <div class="form-group col-md-6 col-lg-6">
+                                    <label class="form-label">Video</label>
+                                    <input type="file" class="form-control" name='video' placeholder="Password">
+                                    <div class="clearfix"></div>
+                                    </div>
+                                    </div>
+                                
+                                
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                        </div>
+                        </div>
                     
 
 

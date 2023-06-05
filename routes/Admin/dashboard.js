@@ -185,9 +185,46 @@ pool.query(`update ${req.params.name} set ? where id = ?`, [req.body, req.body.i
 
 
 
+router.post('/dashboard/store-listing/:name/update-video',upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 8 } ,  { name: 'single_event_image', maxCount: 8 } , { name: 'tree_image', maxCount: 8 } ]), (req, res) => {
+  let body = req.body;
 
 
-router.post('/listing/insert',upload.fields([{ name: 'icon', maxCount: 1 }, { name: 'image', maxCount: 100 }  ]),(req,res)=>{
+  if(req.files.video){
+      body['video'] = req.files.video[0].filename;
+    
+    }
+    else {
+      body['image'] = req.files.image[0].filename;
+    }
+
+    
+
+ 
+    
+    
+
+
+pool.query(`update ${req.params.name} set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+      if(err) {
+          res.json({
+              status:500,
+              type : 'error',
+              description:err
+          })
+      }
+      else {
+            res.redirect(`/admin/dashboard/${req.params.name}`)
+      }
+  })
+
+
+})
+
+
+
+
+
+router.post('/listing/insert',upload.fields([{ name: 'icon', maxCount: 1 }, { name: 'image', maxCount: 100 } , { name: 'video', maxCount: 100 }  ]),(req,res)=>{
   let body = req.body
   body['date'] = sending.date_and_time()
 
@@ -196,9 +233,9 @@ console.log('icon',req.body);
 
 
 
-pool.query(`insert into listing(countryid,stateid,developersid,projectid,agentid,name,description,address,icon,date,propertytypeid) 
+pool.query(`insert into listing(countryid,stateid,developersid,projectid,agentid,name,description,address,icon,date,propertytypeid,currency,price,video) 
 values('${body.countryid}' , '${body.stateid}' , '${body.developersid}' , '${body.projectid}' , '${body.agentid}' , '${body.name}' , 
-'${body.description}' , '${body.address}' , '${req.files.icon[0].filename}', '${req.body.date}' , '${req.body.propertytypeid}')`,(err,result)=>{
+'${body.description}' , '${body.address}' , '${req.files.icon[0].filename}', '${req.body.date}' , '${req.body.propertytypeid}' , '${req.body.currency}' , '${req.body.price}' , '${req.files.video[0].filename}')`,(err,result)=>{
     if(err) throw err;
     else {
       console.log(result.insertId)
@@ -246,7 +283,7 @@ console.log(req.body)
 
 pool.query(`update listing set countryid = '${body.countryid}' ,stateid = '${body.stateid}' ,developersid = '${body.developersid}' ,
 projectid = '${body.projectid}' ,agentid = '${body.agentid}' ,name = '${body.name}' ,description = '${body.description}' ,
-address = '${body.address}' , propertytypeid = '${body.propertytypeid}' where id = '${body.id}'`,(err,result)=>{
+address = '${body.address}' , propertytypeid = '${body.propertytypeid}', currency = '${body.currency}' , price = '${body.price}' where id = '${body.id}'`,(err,result)=>{
     if(err) throw err;
     else {
 

@@ -209,6 +209,7 @@ function makeTable(categories){
 <th>State Name</th>
 <th>Developers Name</th>
 <th>Project Name</th>
+<th>Price</th>
 <th>Agent Name</th>
 <th>Location</th>
 <th>Property Type</th>
@@ -230,6 +231,7 @@ table+=`<tr>
 <td>${item.statename}</td>
 <td>${item.developername}</td>
 <td>${item.projectname}</td>
+<td>${item.currency} ${item.price}</td>
 <td>${item.agentname}</td>
 <td>${item.address}</td>
 <td>${item.propert_type_name}</td>
@@ -242,6 +244,7 @@ table+=`<tr>
 <a href="#!" class="btn btn-success btn-sm" id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Preview </a>
 <a href="#!" class="btn btn-info btn-sm edits" id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit </a>
 <a href="#!" class="btn btn-info btn-sm updateimage"  id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Cover Image </a>
+<a href="#!" class="btn btn-info btn-sm updatevideo"  id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Video </a>
 <a href="#!" class="btn btn-danger btn-sm deleted" id="${item.id}"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
 </td>
 </tr>`
@@ -328,6 +331,9 @@ $('#result').on('click', '.edits', function() {
      $('#pdevelopersid').val(result.developersid)
      $('#pprojectid').val(result.projectid)
      $('#pagentid').val(result.agentid)
+     $('#pcurrency').val(result.currency)
+     $('#pprice').val(result.price)
+
 
 
 
@@ -353,6 +359,13 @@ $('#result').on('click', '.edits', function() {
     const id = $(this).attr('id')
     const result = categories.find(item => item.id == id);
     $('#peid').val(result.id)
+})
+
+
+$('#result').on('click', '.updatevideo', function() {
+    const id = $(this).attr('id')
+    const result = categories.find(item => item.id == id);
+    $('#peid1').val(result.id)
 })
 
 
@@ -385,6 +398,8 @@ $('#update').click(function(){  //data insert in database
         description : $('#pdescription').val(),
         address : $('#paddress').val(),
         propertytypeid : $('#ppropertytypeid').val(),
+        currency : $('#pcurrency').val(),
+        price : $('#pprice').val(),
         b 
 
         
@@ -426,6 +441,8 @@ function update()
 //================================Page Functionality=============================//
 $('#editdiv').hide()
 $('#updateimagediv').hide()
+$('#updatevideodiv').hide()
+
 
 $('#result').on('click', '#back', function() {
     $('#result').hide()
@@ -437,6 +454,8 @@ $('#back1').click(function(){
     $('#insertdiv').hide()
     $('#editdiv').hide()
     $('#updateimagediv').hide()
+$('#updatevideodiv').hide()
+
 
 })
 
@@ -445,10 +464,32 @@ $('#back2').click(function(){
     $('#insertdiv').hide()
     $('#editdiv').hide()
     $('#updateimagediv').hide()
+$('#updatevideodiv').hide()
+
 })
+
+
+$('#back3').click(function(){
+    $('#result').show()
+    $('#insertdiv').hide()
+    $('#editdiv').hide()
+    $('#updateimagediv').hide()
+$('#updatevideodiv').hide()
+
+})
+
+
 
 $('#result').on('click', '.updateimage', function() {
     $('#updateimagediv').show()
+    $('#result').hide()
+    $('#insertdiv').hide()
+    $('#editdiv').hide()
+})
+
+
+$('#result').on('click', '.updatevideo', function() {
+    $('#updatevideodiv').show()
     $('#result').hide()
     $('#insertdiv').hide()
     $('#editdiv').hide()
